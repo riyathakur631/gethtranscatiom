@@ -1,0 +1,35 @@
+$ sudo apt-get install software-properties-common
+$ sudo add-apt-repository -y ppa:ethereum/ethereum
+$ sudo apt-get update
+$ sudo apt-get install ethereum
+$ mkdir private-ethereum
+$ cd private-ethereum
+$ geth --datadir ./datadir account new
+$ nano genesis.json
+{
+  "config": {
+    "chainId": 2019,
+    "homesteadBlock": 0,
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "byzantiumBlock": 0
+  },
+  "difficulty": "400",
+  "gasLimit": "2000000",
+  "alloc": {
+    "82c440bba462220c9b54600e584373014706c177": { 
+    "balance": "100000000000000000000000" 
+    },
+    "9db5b590fdecc10cdb04b85a3503e94e61b207ca": { 
+    "balance": "120000000000000000000000" 
+    }
+  }
+}
+$ geth --datadir ./myDataDir init ./genesis.json
+$ tail -f Eth.log
+> eth.accounts
+web3.fromWei(eth.getBalance(<address_of_account>), "ether")
+> eth.sendTransaction({from:eth.accounts[0], to:eth.accounts[1], value: web3.toWei(1000, "ether")})
+web3.fromWei(eth.getBalance("0x82c440bba462220c9b54600e584373014706c177"), "ether")
+web3.fromWei(eth.getBalance("0x9db5b590fdecc10cdb04b85a3503e94e61b207ca"), "ether")
+
